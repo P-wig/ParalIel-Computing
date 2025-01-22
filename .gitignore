@@ -6,6 +6,7 @@
 !*/
 !*.cpp
 !*.h
+!*.cu
 !.gitignore
 
 #reignore

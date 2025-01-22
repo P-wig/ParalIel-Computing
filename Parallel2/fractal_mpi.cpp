@@ -1,7 +1,7 @@
 /*
 Compile: mpic++ -o fractal_mpi fractal_mpi.cpp
 
-run: mpiexec -n 4 ./fractal_mpi 1024
+Run: mpiexec -n 4 ./fractal_mpi 1024
 */
 
 

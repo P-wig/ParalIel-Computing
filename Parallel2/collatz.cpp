@@ -1,7 +1,7 @@
 /*
 Compile: g++ -g collatz.cpp -o collatz
 
-run: ./collatz 3 4000000
+Run: ./collatz 3 4000000
 */
 
 #include <cstdio>
