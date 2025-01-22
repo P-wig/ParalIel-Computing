@@ -1,15 +1,31 @@
 /*
-Compile in [Developer Command Prompt for VS 2022]: nvcc -o collatz_cuda collatz_cuda.cu --compiler-bindir="C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64"
+First. Install NVIDIA CUDA Toolkit:
+   - Download the NVIDIA CUDA Toolkit from the official website: https://developer.nvidia.com/cuda-downloads
+   - Follow the installation instructions for your operating system and ensure to install the necessary drivers.
 
-Run in [Developer Command Prompt for VS 2022]: collatz_cuda.exe 3 4000000
-                                               collatz_cuda.exe 7 40000000
+Second. Install Visual Studio Build Tools (VS Build Tools):
+   - Download and install VS Build Tools from the official Microsoft website: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+   - During installation, ensure to select "Desktop development with C++" and "MSVC v14.x" components.
 
-Once installed and PATH variable is set, restart PC and nvcc should be available within VScode terminal
+Third. Set Up PATH Variables (this will allow nvcc to be referenced in VScode terminal):
+   - Add the following directory to your system PATH (adjust paths for your installation):
+     - Microsoft Visual Studio Build Tools:
+       - `C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\<version>\bin\Hostx64\x64`
 
-Compile in terminal: nvcc -o collatz_cuda collatz_cuda.cu --compiler-bindir="C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64"
+Forth. Restart Your System:
+   - After modifying the PATH variables, restart your computer to ensure the changes take effect.
 
-Run in terminal: ./collatz_cuda 3 4000000
-                 ./collatz_cuda 7 40000000
+Fifth. Compile!
+   - Compile: nvcc -o collatz_cuda collatz_cuda.cu
+   - Compile explicitly: nvcc -o collatz_cuda collatz_cuda.cu --compiler-bindir="C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64"
+
+Sixth. Run!
+   - If still using [Developer Command Prompt for VS 2022]
+     - collatz_cuda.exe 3 4000000
+     - collatz_cuda.exe 7 40000000
+   - If using terminal
+     - ./collatz_cuda 3 4000000
+     - ./collatz_cuda 7 40000000
 */
 
 
