@@ -16,14 +16,10 @@ Forth. Restart Your System:
    - After modifying the PATH variables, restart your computer to ensure the changes take effect.
 
 Fifth. Compile! <still under configuration!!!>
-   - Compile: nvcc -o fractal_cuda fractal_cuda.cu
-   - Compile explicitly: nvcc -o fractal_cuda fractal_cuda.cu --compiler-bindir="C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.42.34433/bin/Hostx64/x64"
+   
 
 Sixth. Run!
-   - If still using [Developer Command Prompt for VS 2022]
-     - fractal_cuda.exe 4096
-   - If using terminal
-     - ./fractal_cuda 4096
+   
 */
 
 
