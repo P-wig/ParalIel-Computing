@@ -21,8 +21,9 @@ some graphs cannot verify, exit with no error code, possible memory constraint.
 
 static long threads;
 pthread_barrier_t barrier;
+pthread_mutex_t repeat_mutex; // Mutex for repeat flag
 static bool go_again;
-//static bool repeat;
+static bool repeat;
 static ECLgraph g;
 static int* old_label;
 static int* new_label;
@@ -42,26 +43,28 @@ static void* cc( void* arg ) {
   pthread_barrier_wait(&barrier);
   // repeat until all nodes' labels have converged
   do {
-      bool repeat = false; //this was global, not sure why
+      bool local_repeat = false; //this was global, not sure why
 
       // go over all nodes
       for (int v = start; v < stop; v++) {
-          const int beg = g.nindex[v];  // beginning of adjacency list
-          const int end = g.nindex[v + 1];  // end of adjacency list
-          int my_label = old_label[v];
-          for (int i = beg; i < end; i++) {
-              const int n = g.nlist[i];  // neighbor
-              const int nbor_label = old_label[n];
-              // update my label if smaller
-              if (my_label < nbor_label) {
-                  my_label = nbor_label;
-                  repeat = true;
-              }
-          }
-          new_label[v] = my_label;
-      }
+        int my_label = old_label[v];
+
+        for (int i = g.nindex[v]; i < g.nindex[v + 1]; i++) {
+            int n = g.nlist[i]; // Neighbor
+            if (my_label > old_label[n]) { // Corrected condition (propagate smaller label)
+                my_label = old_label[n];
+                local_repeat = true; // A change occurred
+            }
+        }
+        new_label[v] = my_label;
+    }
 
       pthread_barrier_wait(&barrier);
+
+      // Update the global repeat flag safely
+      pthread_mutex_lock(&repeat_mutex);
+      repeat = repeat || local_repeat;
+      pthread_mutex_unlock(&repeat_mutex);
 
       // swap the two label arrays
       if (my_rank == 0) {
